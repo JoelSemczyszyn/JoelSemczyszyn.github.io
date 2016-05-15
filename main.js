@@ -1,5 +1,5 @@
 // ----------------------------------- //
-// Slider done by -------------------- //
+// Slider by ------------------------- //
 // JoelSemczyszyn@gmail.com ---------- //
 // ----------------------------------- //
 
@@ -10,63 +10,23 @@
 
 var bg = document.getElementById("background"),
 	bgCvs = bg.getContext("2d"),
-	mobileBtn = document.getElementById("test"),
-	slide1Btn = document.getElementById("slide1Btn"),
-	slideActive = 0,
-	mobileCheck = 0,
-	slideFinished = 0;
+	mobileBtn = document.getElementById("test");
 
 //
 // Functions 
 // ------------------------------------ //
 
 function tlMobilePlay() { tlMobile.play(); }
-function slide1Play() { tlSlide1.play(); }
-function slide2Play() { tlSlide2.play(); }
-function slide3Play() { tlSlide3.play(); }
-function slideFinished(h) {
-	if (h == 1) {
-		if (slideActive == 2) {
-			return slide2Play;
-		} else {
-			return slide3Play;
-		}
-	} else if (h == 2) {
-		if (slideActive == 1) { // I'm sure there's a more effecient way to write this using objects
-			return slide1Play;
-		} else {
-			return slide3Play;
-		}
-	} else {
-		if (slideActive == 1) {
-			return slide1Play;
-		} else {
-			return slide2Play;
-		}
-	}
-	slideActive = 0;
-}
-
-function slidePlay(e) { 
-	if (slideActive == e) {} else if (e == 1) {
-		return slide1Play;
-	} else if (e == 2) {
-		return slide2Play;
-	} else if (e == 3) {
-		return slide3Play;
-	}
-}
-
-function sA(g) {
-	slideActive = g;
-}
+function slide1Play() { tlSlide1.restart(); tlSlide1.play(); }
+function slide2Play() { tlSlide2.restart(); tlSlide2.play(); }
+function slide3Play() { tlSlide3.restart(); tlSlide3.play(); }
 
 // Buttons
 
 mobileBtn.addEventListener("click", tlMobilePlay);
-slide1Btn.addEventListener("click", slidePlay(1));
-slide2Btn.addEventListener("click", slidePlay(2));
-slide3Btn.addEventListener("click", slidePlay(3));
+slide1Btn.addEventListener("click", slide1Play);
+slide2Btn.addEventListener("click", slide2Play);
+slide3Btn.addEventListener("click", slide3Play);
 
 // 
 // Canvas Work  
@@ -94,26 +54,16 @@ bgCvs.fillRect(0, 0, 1400, 400);
 var	tlMobile = new TimelineLite( {paused:true} ),
 	tlSlide1 = new TimelineLite( {paused:true} ),
 	tlSlide2 = new TimelineLite( {paused:true} ),
-	tlSlide3 = new TimelineLite( {paused:true} );
+	tlSlide3 = new TimelineLite( {paused:true} ),
+	tlSlideC = new TimelineLite(); // Move the first line of other tweens to independant line, call it on all button presses then follow up with appropriate slide timeline
 
 tlMobile.add( TweenMax.staggerFromTo(".mobile", 0.5, {opacity: 0, y:10}, {opacity: 1, y:0}, 0.2));
 
-tlSlide1.add( TweenMax.fromTo(".slide1", 0.5, {y:5, opacity:0}, {opacity:1, y:0}))
-	.add(function() {return sA(1);})
-	.add(function(){return tlSlide1.pause();})
-	.to(".slide1", 0.5, {y:-5, opacity:0})
-	.add(function() {return slideFinished(1)});
+tlSlide1.add( TweenMax.to([".slide1, .slide2, .slide3"], 0.5, {opacity: 0}))
+	.fromTo(".slide1", 0.5, {y:5}, {opacity:1, y:0});
 
-tlSlide2.add( TweenMax.fromTo(".slide2", 0.5, {y:5, opacity:0}, {opacity:1, y:0}))
-	.add(function() {return sA(2);})
-	.add(function(){return tlSlide2.pause();})
-	.to(".slide2", 0.5, {y:-5, opacity:0})
-	.add(function() {return slideFinished(2)});
+tlSlide2.add( TweenMax.to([".slide1, .slide2, .slide3"], 0.5, {opacity: 0}))
+	.fromTo(".slide2", 0.5, {y:5}, {opacity:1, y:0});
 
-tlSlide3.add( TweenMax.fromTo(".slide3", 0.5, {y:5, opacity:0}, {opacity:1, y:0}))
-	.add(function() {return sA(3);})
-	.add(function(){return tlSlide3.pause();})
-	.to(".slide3", 0.5, {y:-5, opacity:0})
-	.add(function() {return slideFinished(3)});
-
-
+tlSlide3.add( TweenMax.to([".slide1, .slide2, .slide3"], 0.5, {opacity: 0}))
+	.fromTo(".slide3", 0.5, {y:5}, {opacity:1, y:0});
