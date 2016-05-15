@@ -1,1 +1,74 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 
+Slider created by 
+Joel.Semczyszyn@Gmail.com
+	-->
+
+<head>
+	<meta charset="utf-8" />
+
+
+	<!-- 
+	CSS 
+		-->
+
+	<style>
+
+	.mobile,
+	.slide1,
+	.slide2,
+	.slide3 {
+		position: absolute;
+		background-size: cover;
+		opacity: 0;
+		background-repeat: no-repeat;
+		z-index: 2;
+	}
+
+	</style>
+
+
+	<!-- 
+	Scripts 
+		-->
+
+	<link rel="stylesheet" text/type="css" href="ui-kit.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSRulePlugin.min.js"></script>
+
+
+</head>
+
+<body>
+
+	<div class="tm-top-a">
+		<canvas id="background" width="1400px" height="400px" style="position: absolute; z-index: 1; min-height: 400px;"> </canvas>
+		<div class="uk-container uk-container-center" style="min-height: 400px; z-index: 2; position: relative;">
+			<h2 class="uk-text-center">Javascript Slider</h2>
+			<img class="uk-align-center uk-margin-bottom-remove" src="macbook-silver.png" width="565px" height="auto">
+			<div class="mobile" style="background-image: url(&quot;iPhone-SE.png&quot;); height: 300px; width: 150px; top: 55px; left: 143px;"></div>
+			<div class="slide1" style="background-image: url(&quot;slide-01.jpg&quot;); height: 242px; width: 370px; top: 71px; left: 413px; "></div>
+			<div class="slide2" style="background-image: url(&quot;slide-02.jpg&quot;); height: 242px; width: 370px; top: 71px; left: 413px; "></div>
+			<div class="slide3" style="background-image: url(&quot;slide-03.jpg&quot;); height: 242px; width: 370px; top: 71px; left: 413px; "></div>
+			<div id="test" class="uk-button uk-button-primary uk-button-large">View Mobile</div>
+			<div id="slide1Btn" class="uk-button uk-button-primary uk-button-large">Slide 1</div>
+			<div id="slide2Btn" class="uk-button uk-button-primary uk-button-large">Slide 2</div>
+			<div id="slide3Btn" class="uk-button uk-button-primary uk-button-large">Slide 3</div>
+		</div>
+		
+	</div>
+
+	<div class="tm-main">
+		<div class="uk-container uk-container-center">
+			<div class="uk-text-center">
+		        <p class="uk-article-lead uk-margin-large-top">Slider end/Body start</p>
+		        <blockquote>“I encourage you to accept that you may not be able to see a solution <br class="uk-hidden-small"> right now. But when it comes to the digital world, <strong>anything you can imagine can be.</strong>“</blockquote>
+		    </div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="main.js"></script>
+
+</body>
